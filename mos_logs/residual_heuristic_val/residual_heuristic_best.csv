@@ -1,0 +1,2 @@
+threshold,split,combine,residual_offsets,num_frames,min_component_size,moving_iou,moving_precision,moving_recall,moving_f1,static_iou,mean_iou,pixel_accuracy,tp_moving,fp_moving,fn_moving,tn_static,valid_pixels
+0.05,test,first,[1],1101,0,0.05179992016351173,0.059548427973659473,0.284738487118191,0.09849766607873844,0.9521497216485161,0.5019748209060139,0.9522744784564873,71241,1125113,178957,25949063,27324374

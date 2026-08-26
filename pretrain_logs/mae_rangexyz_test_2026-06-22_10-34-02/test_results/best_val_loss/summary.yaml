@@ -1,0 +1,9 @@
+checkpoint: /home/devuser/workspace/LidarGaussianVideoView/pretrain_logs/mae_rangexyz_test_2026-06-22_10-34-02/checkpoints/best_val_loss.pt
+test_sequences:
+- '07'
+num_samples: 20
+loss_total: 0.5310974240303039
+loss_xyz: 0.17976999133825303
+loss_range: 0.44121242463588717
+masked_valid_ratio: 0.5010875940322876
+valid_ratio: 0.7926422119140625

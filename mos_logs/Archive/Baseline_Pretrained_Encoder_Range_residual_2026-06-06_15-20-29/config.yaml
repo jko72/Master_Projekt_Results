@@ -1,0 +1,84 @@
+dataset_path: /home/devuser/workspace/data/datasets/SemanticKitti/dataset/sequences
+model_params:
+  grid_height: 64
+  grid_width: 512
+  FOV_UP: 3.0
+  FOV_DOWN: -25.0
+  min_range: 0.0
+  max_range: 80.0
+mos_data_params:
+  input_mode: range_xyz_residual
+  residual_offsets:
+  - 1
+  residual_folder_template: residual_images_{offset}
+  mos_label_folder: mos_labels
+  ignore_index: -1
+  static_index: 0
+  moving_index: 1
+  train_sequences:
+  - '00'
+  - '01'
+  - '02'
+  - '03'
+  - '04'
+  - '05'
+  - '06'
+  - '07'
+  - 09
+  - '10'
+  val_sequences:
+  - 08
+  require_moving_train: false
+  require_moving_val: false
+  min_moving_pixels: 1
+  use_moving_frame_sampler: false
+  moving_frame_weight: 5.0
+  static_frame_weight: 1.0
+mos_model_params:
+  name: salsanext_mos
+  in_channels: 5
+  num_classes: 2
+  base_channels: 32
+  dropout: 0.1
+  norm: batch
+mos_train_params:
+  batch_size: 16
+  num_workers: 6
+  epochs: 50
+  learning_rate: 0.0005
+  weight_decay: 0.0001
+  clip_grad_norm: 5.0
+  static_class_weight: 1.0
+  moving_class_weight: 10.0
+  optimizer: adamw
+  scheduler: none
+  seed: 42
+  deterministic: false
+  pretrained_encoder_path: /home/devuser/workspace/LidarGaussianVideoView/logs/26-05-29_09-47-53/weights/model_final.pt
+  pretrained_encoder_strict: true
+  pretrained_encoder_adapt_input_channels: true
+  pretrained_encoder_init_new_channels: mean
+mos_log_params:
+  log_root: /home/devuser/workspace/LidarGaussianVideoView/mos_logs
+  run_name: Baseline_Pretrained_Encoder_Range_residual
+  use_tensorboard: true
+  save_checkpoints: true
+  save_visuals: false
+  save_csv: true
+  save_config_copy: true
+run_metadata:
+  cfg_path: /home/devuser/workspace/src/configs/mos_semanticKitti_default.yaml
+  log_dir: /home/devuser/workspace/LidarGaussianVideoView/mos_logs/Baseline_Pretrained_Encoder_Range_residual_2026-06-06_15-20-29
+  timestamp: 2026-06-06_15-20-29
+  cli_args:
+    cfg_path: src/configs/mos_semanticKitti_default.yaml
+    device: cuda
+    run_name: null
+    epochs: null
+    batch_size: null
+    lr: null
+    input_mode: null
+    residual_offsets: null
+    moving_weight: null
+    num_workers: null
+    pretrained_encoder: null
