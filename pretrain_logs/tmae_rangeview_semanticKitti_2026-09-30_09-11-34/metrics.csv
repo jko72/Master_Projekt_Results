@@ -1,0 +1,2 @@
+epoch,lr,train/loss_total,train/loss_xyz,train/loss_range,train/loss_normals,train/loss_residual,train/residual_pos_ratio,train/masked_valid_ratio,train/valid_ratio,val/loss_total,val/loss_xyz,val/loss_range,val/loss_normals,val/loss_residual,val/residual_pos_ratio,val/masked_valid_ratio,val/valid_ratio
+1,0.00025,3.225595188056065,2.15293574850628,2.0950881422099346,0.5403916973260194,0.0,0.0,0.7542473801821578,0.7816474781832474,1.8186510281624946,0.8100025400442429,1.361617393595656,0.5203236232438192,0.0,0.0,0.7541807562383939,0.7788698990543732
