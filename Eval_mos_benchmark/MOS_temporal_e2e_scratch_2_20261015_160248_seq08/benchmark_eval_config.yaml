@@ -1,0 +1,33 @@
+checkpoint: /home/devuser/workspace/LidarGaussianVideoView/mos_logs/MOS_temporal_e2e_scratch_2_20261015_160248/checkpoints/best_moving_iou.pt
+checkpoint_epoch: 45
+checkpoint_train_sequences:
+- '00'
+- '01'
+- '02'
+- '03'
+- '04'
+- '05'
+- '06'
+- 09
+- '10'
+eval_sequences:
+- 08
+sequence_07_role: internal_holdout_official_train
+dataset_root: /home/devuser/workspace/data/datasets/SemanticKitti/dataset/sequences
+model: salsanext_temporal_e2e
+input_mode: range_xyz
+projection:
+  height: 64
+  width: 512
+  fov_up: 3.0
+  fov_down: -25.0
+  min_range: 0.1
+  max_range: 80.0
+  filter_max_before_projection: true
+history_init: repeat_earliest
+pose_source: poses.txt + calib.txt (LiDAR frame)
+gt_mapping: PRBonn semantic-kitti-mos learning_map (local mos_label_helper)
+unmapped_point_fallback: static
+n_scans: 4071
+partial_smoke_test: false
+pipeline_git_commit: c7d587ac3c20e0064c6c01e67ea45202fc3790f1
