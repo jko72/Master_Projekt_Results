@@ -1,0 +1,56 @@
+checkpoint: /home/devuser/workspace/LidarGaussianVideoView/HPC_results/mos_logs/MOS_Baseline_XYZRI_Scratch_100Ep_2026-10-19_17-09-03/checkpoints/best_moving_iou.pt
+checkpoint_epoch: 66
+checkpoint_train_sequences:
+- '00'
+- '01'
+- '02'
+- '03'
+- '04'
+- '05'
+- '06'
+- '07'
+- 09
+- '10'
+eval_sequences:
+- '11'
+- '12'
+- '13'
+- '14'
+- '15'
+- '16'
+- '17'
+- '18'
+- '19'
+- '20'
+- '21'
+sequence_07_role: internal_holdout_official_train
+dataset_root: /home/devuser/workspace/data/datasets/SemanticKitti/dataset/sequences
+model: salsanext_mos
+input_mode: range_xyz_intensity
+channel_names:
+- x
+- y
+- z
+- range
+- intensity
+normalization:
+  mode: intensity_only
+  mean:
+    intensity: 0.21
+  std:
+    intensity: 0.16
+projection:
+  height: 64
+  width: 512
+  fov_up: 3.0
+  fov_down: -25.0
+  min_range: 0.0
+  max_range: null
+  filter_max_before_projection: false
+history_init: null
+pose_source: null
+gt_mapping: PRBonn semantic-kitti-mos learning_map (local mos_label_helper)
+unmapped_point_fallback: static
+n_scans: 20351
+partial_smoke_test: false
+pipeline_git_commit: a43996067bc941124a49b3cad4e2c243e78e79e8
