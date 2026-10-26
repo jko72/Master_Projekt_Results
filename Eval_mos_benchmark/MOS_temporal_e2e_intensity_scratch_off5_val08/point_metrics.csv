@@ -1,0 +1,2 @@
+n_scans,tp_moving,fp_moving,fn_moving,tn_static,n_gt_valid,n_points,fallback_points,point_moving_iou,point_moving_precision,point_moving_recall,point_moving_f1,point_static_iou,point_miou
+4071,1103272,702556,560849,483816978,486183655,499079562,10692,0.46616923221884526,0.6109507660751744,0.6629758292816448,0.6359009887465205,0.9973954729066007,0.731782352562723
