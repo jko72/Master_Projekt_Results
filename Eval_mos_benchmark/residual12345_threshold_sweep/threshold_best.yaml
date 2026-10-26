@@ -1,0 +1,57 @@
+selection_sequence: 08
+selection_metric: point_moving_iou
+tie_break: closest_to_0.5
+best_threshold: 0.85
+best:
+  threshold: 0.85
+  point_tp_moving: 982694
+  point_fp_moving: 446718
+  point_fn_moving: 681427
+  point_tn_static: 484072816
+  point_n_gt_valid: 486183655
+  point_moving_iou: 0.46554663809035174
+  point_moving_precision: 0.687481286011311
+  point_moving_recall: 0.5905183577396115
+  point_moving_f1: 0.6353214916407874
+  point_static_iou: 0.9976748912498548
+  point_miou: 0.7316107646701032
+  pixel_tp_moving: 251551
+  pixel_fp_moving: 37975
+  pixel_fn_moving: 167038
+  pixel_tn_static: 100894846
+  pixel_valid_pixels: 101351410
+  pixel_moving_iou: 0.5509654725295785
+  pixel_moving_precision: 0.8688373410332451
+  pixel_moving_recall: 0.6009498577363332
+  pixel_moving_f1: 0.7104806374346366
+  pixel_static_iou: 0.9979721732351772
+  pixel_mean_iou: 0.7744688228823778
+  pixel_pixel_accuracy: 0.99797720623719
+threshold_0.5:
+  threshold: 0.5
+  point_tp_moving: 1008671
+  point_fp_moving: 519387
+  point_fn_moving: 655450
+  point_tn_static: 484000147
+  point_n_gt_valid: 486183655
+  point_moving_iou: 0.4619497615763258
+  point_moving_precision: 0.6600999438502989
+  point_moving_recall: 0.6061284005189527
+  point_moving_f1: 0.6319639343533053
+  point_static_iou: 0.9975785293167547
+  point_miou: 0.7297641454465402
+  pixel_tp_moving: 258540
+  pixel_fp_moving: 50218
+  pixel_fn_moving: 160049
+  pixel_tn_static: 100882603
+  pixel_valid_pixels: 101351410
+  pixel_moving_iou: 0.5514849394313533
+  pixel_moving_precision: 0.8373548215754462
+  pixel_moving_recall: 0.6176464264469296
+  pixel_moving_f1: 0.7109123931853357
+  pixel_static_iou: 0.9979200610290319
+  pixel_mean_iou: 0.7747025002301926
+  pixel_pixel_accuracy: 0.9979253668005211
+improvement_vs_0.5:
+  point_moving_iou: 0.0035968765140259595
+  pixel_moving_iou: -0.0005194669017748454
