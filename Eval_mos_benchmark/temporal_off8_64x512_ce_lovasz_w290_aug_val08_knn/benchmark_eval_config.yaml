@@ -1,0 +1,58 @@
+checkpoint: /home/devuser/workspace/LidarGaussianVideoView/HPC_results/mos_logs/MOS_temporal_e2e_off8_64x512_CE_Lovasz_w290_aug/checkpoints/best_moving_iou.pt
+checkpoint_epoch: 78
+checkpoint_train_sequences:
+- '00'
+- '01'
+- '02'
+- '03'
+- '04'
+- '05'
+- '06'
+- '07'
+- 09
+- '10'
+eval_sequences:
+- 08
+sequence_07_role: internal_holdout_official_train
+dataset_root: /home/devuser/workspace/data/datasets/SemanticKitti/dataset/sequences
+model: salsanext_temporal_e2e
+input_mode: range_xyz_intensity
+channel_names:
+- x
+- y
+- z
+- range
+- intensity
+normalization:
+  mode: intensity_only
+  mean:
+    intensity: 0.21
+  std:
+    intensity: 0.16
+moving_threshold: 0.5
+threshold_sweep:
+  enabled: false
+projection:
+  height: 64
+  width: 512
+  fov_up: 3.0
+  fov_down: -25.0
+  min_range: 0.1
+  max_range: 80.0
+  filter_max_before_projection: true
+history_init: repeat_earliest
+pose_source: poses.txt + calib.txt (LiDAR frame)
+gt_mapping: PRBonn semantic-kitti-mos learning_map (local mos_label_helper)
+unmapped_point_fallback: static
+n_scans: 4071
+point_postprocess_seconds_total: 94.31423866236582
+point_postprocess_seconds_per_scan: 0.023167339391394207
+postprocessing:
+  method: knn
+  knn: 5
+  search: 5
+  sigma: 1.0
+  cutoff: 1.0
+  chunk_size: 32768
+partial_smoke_test: false
+pipeline_git_commit: a39624e8a4ef79fa5f2cbdd5d61afd2d0ac8c7f0
