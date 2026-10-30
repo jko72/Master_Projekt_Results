@@ -1,0 +1,159 @@
+dataset_path: /hpc/SemanticKitti/dataset/sequences
+model_params:
+  grid_height: 64
+  grid_width: 512
+  FOV_UP: 3.0
+  FOV_DOWN: -25.0
+  min_range: 0.1
+  max_range: 80.0
+mos_data_params:
+  input_mode: range_xyz_intensity
+  normalization: intensity_only
+  previous_offsets:
+  - 8
+  scan_rate_hz: 10.0
+  mos_label_folder: mos_labels
+  ignore_index: -1
+  train_sequences:
+  - '00'
+  - '01'
+  - '02'
+  - '03'
+  - '04'
+  - '05'
+  - '06'
+  - '07'
+  - 09
+  - '10'
+  val_sequences:
+  - 08
+  test_sequences:
+  - '11'
+  - '12'
+  - '13'
+  - '14'
+  - '15'
+  - '16'
+  - '17'
+  - '18'
+  - '19'
+  - '20'
+  - '21'
+mos_model_params:
+  name: salsanext_temporal_e2e
+  in_channels: 5
+  num_classes: 2
+  dropout: 0.1
+  attention_heads: 8
+  radius: 1
+  compare_channels: 64
+  fusion: bottleneck_only
+mos_label_params:
+  enabled: true
+  mode: precompute
+  folder_name: mos_labels
+  ignore_index: -1
+  static_index: 0
+  moving_index: 1
+  overwrite: false
+  min_range: 0.1
+  max_range: 80.0
+  label_mapping: semantickitti_mos
+mos_train_params:
+  loss:
+    type: ce_lovasz
+    lovasz_weight: 1.0
+    lovasz_classes: present
+    lovasz_per_image: false
+  seed: 42
+  deterministic: false
+  epochs: 100
+  batch_size: 8
+  num_workers: 2
+  optimizer: adamw
+  learning_rate: 0.0005
+  learning_rate_min: 5.0e-06
+  weight_decay: 0.0001
+  scheduler: cosine
+  clip_grad_norm: 5.0
+  static_class_weight: 1.0
+  moving_class_weight: 290.0
+  gradient_accumulation: 1
+  amp: false
+  amp_dtype: float16
+  pretrained_path: /hpc/logs/mos/semanticKitti_MAE_Pretrain_temporal_e2e_p2_bs32/job-5388/MAE_Pretrain_temporal_e2e_p2_bs32_20261028_132846_510269/checkpoints/best_val_loss.pt
+mos_log_params:
+  log_root: /hpc/logs/mos/mos_semanticKitti_temporal_e2e_MAE5388_p1/job-5690
+  run_name: MOS_temporal_e2e_off8_64x512_CE_Lovasz_w290_aug_MAE5388_p1
+  use_tensorboard: true
+mos_augmentation:
+  enabled: true
+  azimuth_rotation:
+    enabled: true
+    probability: 0.5
+  historical_point_dropout:
+    enabled: true
+    probability: 0.5
+    max_dropout_ratio: 0.1
+  intensity_jitter:
+    enabled: true
+    probability: 0.5
+    std: 0.02
+run_metadata:
+  world_size: 2
+  batch_size_per_gpu: 8
+  effective_global_batch_size: 16
+  slurm_job_id: '5690'
+  cli_args:
+    cfg_path: src/configs/mos_semanticKitti_temporal_e2e_MAE5388_p1.yaml
+    pretrained_path: null
+    resume: null
+    log_root: /hpc/logs/mos/mos_semanticKitti_temporal_e2e_MAE5388_p1/job-5690
+    device: cuda
+    epochs: null
+    batch_size: null
+    num_workers: null
+    max_batches: null
+    dry_run: false
+    diagnose_validation: false
+pretraining_transfer:
+  path: /hpc/logs/mos/semanticKitti_MAE_Pretrain_temporal_e2e_p2_bs32/job-5388/MAE_Pretrain_temporal_e2e_p2_bs32_20261028_132846_510269/checkpoints/best_val_loss.pt
+  format: temporal_e2e_masked_reconstruction_v1
+  epoch: 50
+  loaded_keys: 327
+  excluded_keys:
+  - decoder.logits.bias
+  - decoder.logits.weight
+  metadata:
+    channel_names:
+    - x
+    - y
+    - z
+    - range
+    - intensity
+    in_channels: 5
+    input_mode: range_xyz_intensity
+    normalization:
+      mode: intensity_only
+      mean:
+        intensity: 0.21
+      std:
+        intensity: 0.16
+    previous_offsets:
+    - 8
+    scan_rate_hz: 10.0
+    projection:
+      grid_height: 64
+      grid_width: 512
+      FOV_UP: 3.0
+      FOV_DOWN: -25.0
+      min_range: 0.1
+      max_range: 80.0
+    model:
+      name: salsanext_temporal_e2e
+      in_channels: 5
+      dropout: 0.1
+      attention_heads: 8
+      radius: 1
+      compare_channels: 64
+      fusion: bottleneck_only
