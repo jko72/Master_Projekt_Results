@@ -1,0 +1,87 @@
+# Parallel LMNet MAE, P1/P100 FP32. Effective batch: 1 x 2 GPUs x 8 accumulation = 16.
+# Mask 8x64 / image 64x2048 equals old 8x16 / image 64x512.
+dataset_path: /hpc/SemanticKitti/dataset/sequences
+model_params:
+  grid_height: 64
+  grid_width: 2048
+  FOV_UP: 3.0
+  FOV_DOWN: -25.0
+  min_range: 0.0
+  max_range: null
+mos_data_params:
+  input_mode: range_xyz_intensity
+  normalization: paper_normalization
+  previous_offsets:
+  - 8
+  scan_rate_hz: 10.0
+  train_sequences:
+  - '00'
+  - '01'
+  - '02'
+  - '03'
+  - '04'
+  - '05'
+  - '06'
+  - '07'
+  - 09
+  - '10'
+  val_sequences:
+  - 08
+  test_sequences:
+  - '11'
+  - '12'
+  - '13'
+  - '14'
+  - '15'
+  - '16'
+  - '17'
+  - '18'
+  - '19'
+  - '20'
+  - '21'
+  projection_mode: lmnet
+  alignment_version: lmnet_v1
+mos_model_params:
+  name: salsanext_temporal_e2e
+  in_channels: 5
+  num_classes: 5
+  dropout: 0.1
+  attention_heads: 8
+  radius: 1
+  compare_channels: 64
+  fusion: bottleneck_only
+mos_augmentation:
+  mode: lmnet
+mae_params:
+  mask:
+    type: patch
+    patch_h: 8
+    patch_w: 64
+    mask_ratio: 0.5
+    mask_only_valid: true
+    apply_to: current
+  loss:
+    xyz_weight: 0.5
+    range_weight: 1.0
+    intensity_weight: 0.25
+    beta: 1.0
+mae_train_params:
+  epochs: 50
+  batch_size: 1
+  num_workers: 2
+  optimizer: adamw
+  scheduler: warmup_cosine
+  learning_rate: 0.0005
+  learning_rate_min: 5.0e-06
+  weight_decay: 0.0001
+  num_warmup_epochs: 2
+  clip_grad_norm: 5.0
+  seed: 42
+  deterministic: false
+  amp: false
+  amp_dtype: float16
+  gradient_accumulation: 8
+mae_log_params:
+  log_root: /hpc/logs/temporal_e2e_mae_lmnet
+  run_name: MAE_Pretrain_temporal_e2e_lmnet_fullres_p1_2gpu_global16
+  use_tensorboard: true
