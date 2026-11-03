@@ -1,0 +1,2 @@
+sequence,n_scans,num_bootstrapped_frames,tp_moving,fp_moving,fn_moving,tn_static,n_gt_valid,n_points,fallback_points,point_moving_iou,point_moving_precision,point_moving_recall,point_moving_f1,point_static_iou,point_miou
+08,4071,8,1204696,345786,459425,484173748,486183655,499079562,0,0.5993789762411893,0.7769816095897921,0.7239233204797006,0.7495146367996297,0.9983396991043482,0.7988593376727687
