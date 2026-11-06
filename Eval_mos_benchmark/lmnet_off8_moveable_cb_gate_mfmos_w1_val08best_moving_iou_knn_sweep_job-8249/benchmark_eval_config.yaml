@@ -1,0 +1,96 @@
+checkpoint: /hpc/logs/mos/mos_semanticKitti_temporal_e2e_lmnet_movable_cb_gate/job-8228/MOS_temporal_e2e_lmnet_off8_movable_cb_gate_mfmos_w1_20261104_154338/checkpoints/best_moving_iou.pt
+checkpoint_epoch: 85
+checkpoint_train_sequences:
+- '00'
+- '01'
+- '02'
+- '03'
+- '04'
+- '05'
+- '06'
+- '07'
+- 09
+- '10'
+eval_sequences:
+- 08
+sequence_07_role: train
+dataset_root: /hpc/SemanticKitti/dataset/sequences
+model: salsanext_temporal_e2e
+input_mode: range_xyz_intensity
+channel_names:
+- x
+- y
+- z
+- range
+- intensity
+normalization:
+  mode: paper_normalization
+  mean:
+    x: 10.88
+    y: 0.23
+    z: -1.04
+    range: 12.12
+    intensity: 0.21
+  std:
+    x: 11.47
+    y: 6.91
+    z: 0.86
+    range: 12.32
+    intensity: 0.16
+moving_threshold: 0.5
+threshold_sweep:
+  enabled: true
+  selection_sequence: 08
+  thresholds:
+  - 0.05
+  - 0.1
+  - 0.15
+  - 0.2
+  - 0.25
+  - 0.3
+  - 0.35
+  - 0.4
+  - 0.45
+  - 0.5
+  - 0.55
+  - 0.6
+  - 0.65
+  - 0.7
+  - 0.75
+  - 0.8
+  - 0.85
+  - 0.9
+  - 0.95
+  - 0.975
+  - 0.99
+  selection_metric: point_moving_iou
+  tie_break: closest_to_0.5
+  best_threshold: 0.4
+  improvement_vs_0.5: 0.0015768168204982613
+movable_diagnostics:
+  enabled: false
+projection:
+  height: 64
+  width: 2048
+  fov_up: 3.0
+  fov_down: -25.0
+  min_range: 0.0
+  max_range: null
+  filter_max_before_projection: true
+  projection_mode: lmnet
+history_init: zero_missing
+pose_source: poses.txt + calib.txt (LiDAR frame)
+gt_mapping: PRBonn semantic-kitti-mos learning_map (local mos_label_helper)
+unmapped_point_fallback: static
+n_scans: 4071
+point_postprocess_seconds_total: 142.33967911824584
+point_postprocess_seconds_per_scan: 0.03496430339431241
+postprocessing:
+  method: knn
+  knn: 5
+  search: 5
+  sigma: 1.0
+  cutoff: 1.0
+  chunk_size: 32768
+partial_smoke_test: false
+pipeline_git_commit: 5588656de1b2cd7f5879fab1e959eafb40dee883
