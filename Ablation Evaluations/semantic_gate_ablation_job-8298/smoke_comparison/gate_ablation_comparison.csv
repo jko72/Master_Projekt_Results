@@ -1,0 +1,12 @@
+metric,gate_on,gate_off,delta_on_minus_off,delta_percentage_points
+point_moving_iou,0.5959915611814346,0.5959915611814346,0.0,0.0
+point_moving_precision,0.9327830188679245,0.9327830188679245,0.0,0.0
+point_moving_recall,0.6227365769170209,0.6227365769170209,0.0,0.0
+point_moving_f1,0.7468605419695968,0.7468605419695968,0.0,0.0
+tp_moving,3955,3955,0,
+fp_moving,285,285,0,
+fn_moving,2396,2396,0,
+tn_static,585635,585635,0,
+n_gt_valid,592271,592271,0,
+n_points,615906,615906,0,
+n_scans,5,5,0,
