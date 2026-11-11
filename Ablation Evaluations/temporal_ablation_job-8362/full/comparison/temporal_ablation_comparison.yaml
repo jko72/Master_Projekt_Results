@@ -1,0 +1,395 @@
+normal_dir: /hpc/logs/mos/evaluations/temporal_ablation_job-8362/full/normal
+mask_history_dir: /hpc/logs/mos/evaluations/temporal_ablation_job-8362/full/mask_history
+bypass_temporal_dir: /hpc/logs/mos/evaluations/temporal_ablation_job-8362/full/bypass_temporal
+protocol:
+  checkpoint: /hpc/logs/mos/mos_semanticKitti_temporal_e2e_lmnet_movable_cb_gate_temporal_sampling/job-8307/MOS_temporal_e2e_lmnet_cb_gate_temporal_sampling_5_8_10_w1_20261109_135024/checkpoints/best_moving_iou.pt
+  checkpoint_sha256: bd089e1da14491a962674c333542069640943d5c01a7b08825db0b094dc26e06
+  checkpoint_epoch: 69
+  checkpoint_model_config:
+    dataset_path: /hpc/SemanticKitti/dataset/sequences
+    model_params:
+      grid_height: 64
+      grid_width: 2048
+      FOV_UP: 3.0
+      FOV_DOWN: -25.0
+      min_range: 0.0
+      max_range: null
+    mos_data_params:
+      input_mode: range_xyz_intensity
+      normalization: paper_normalization
+      previous_offsets: &id001
+      - 8
+      temporal_offset_sampling:
+        enabled: true
+        offsets:
+        - 5
+        - 8
+        - 10
+        probabilities:
+        - 0.25
+        - 0.5
+        - 0.25
+        train_only: true
+      scan_rate_hz: 10.0
+      mos_label_folder: mos_labels_2048_lmnet_v1
+      ignore_index: -1
+      train_sequences:
+      - '00'
+      - '01'
+      - '02'
+      - '03'
+      - '04'
+      - '05'
+      - '06'
+      - '07'
+      - 09
+      - '10'
+      val_sequences:
+      - 08
+      test_sequences:
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      - '15'
+      - '16'
+      - '17'
+      - '18'
+      - '19'
+      - '20'
+      - '21'
+      projection_mode: lmnet
+      alignment_version: lmnet_v1
+      online_validation_labels: true
+    mos_model_params:
+      name: salsanext_temporal_e2e
+      in_channels: 5
+      num_classes: 2
+      dropout: 0.1
+      attention_heads: 8
+      radius: 1
+      compare_channels: 64
+      fusion: bottleneck_only
+      movable_branch: current_bottleneck
+      semantic_fusion: bottleneck_gate
+    mos_label_params:
+      enabled: false
+      mode: precompute
+      folder_name: mos_labels_2048_lmnet_v1
+      ignore_index: -1
+      static_index: 0
+      moving_index: 1
+      overwrite: false
+      min_range: 0.0
+      max_range: null
+      label_mapping: semantickitti_mos
+    mos_train_params:
+      loss:
+        type: ce_lovasz
+        lovasz_weight: 1.0
+        lovasz_classes: present
+        lovasz_per_image: false
+      seed: 42
+      deterministic: false
+      epochs: 100
+      batch_size: 8
+      num_workers: 2
+      optimizer: sgd
+      learning_rate: 0.01
+      weight_decay: 0.0001
+      scheduler: lmnet
+      write_sample_logs: false
+      clip_grad_norm: 0.0
+      static_class_weight: 1.0209899532210003
+      moving_class_weight: 296.43707590294014
+      gradient_accumulation: 1
+      amp: false
+      amp_dtype: float16
+      pretrained_path: null
+      momentum: 0.9
+      warmup_epochs: 1
+      lr_decay_per_epoch: 0.99
+      checkpoint_metric: mean_iou
+    mos_log_params:
+      log_root: /hpc/logs/mos/mos_semanticKitti_temporal_e2e_lmnet_movable_cb_gate_temporal_sampling/job-8307
+      run_name: MOS_temporal_e2e_lmnet_cb_gate_temporal_sampling_5_8_10_w1
+      use_tensorboard: true
+    mos_augmentation:
+      enabled: true
+      azimuth_rotation:
+        enabled: false
+        probability: 0.5
+      historical_point_dropout:
+        enabled: false
+        probability: 0.5
+        max_dropout_ratio: 0.1
+      intensity_jitter:
+        enabled: false
+        probability: 0.5
+        std: 0.02
+      mode: lmnet
+    mos_auxiliary:
+      enabled: true
+      task: movable
+      loss_weight: 1.0
+      movable:
+        class_weights:
+        - 1.07047068699
+        - 20.55648005566
+        loss:
+          type: ce_lovasz
+          lovasz_weight: 1.0
+          lovasz_classes: present
+          lovasz_per_image: false
+        ignore_index: -1
+      inference:
+        use_auxiliary_output: false
+    run_metadata:
+      world_size: 2
+      batch_size_per_gpu: 8
+      effective_global_batch_size: 16
+      slurm_job_id: '8307'
+      cli_args:
+        cfg_path: src/configs/mos_semanticKitti_temporal_e2e_lmnet_movable_cb_gate_temporal_sampling.yaml
+        pretrained_path: null
+        resume: null
+        log_root: /hpc/logs/mos/mos_semanticKitti_temporal_e2e_lmnet_movable_cb_gate_temporal_sampling/job-8307
+        device: cuda
+        epochs: null
+        batch_size: null
+        num_workers: null
+        max_batches: null
+        dry_run: false
+        diagnose_validation: false
+      model_options:
+        movable_branch: current_bottleneck
+        semantic_fusion: bottleneck_gate
+      reference_commit: 4f2e96f46f5ac267cf00e404ec94514f91ebfbf1
+      comparison_deviations:
+      - epochs_100_instead_of_150
+      - batch_size
+      - world_size
+  eval_sequences:
+  - 08
+  dataset_root: /hpc/SemanticKitti/dataset/sequences
+  n_scans: 4071
+  moving_threshold: 0.5
+  projection:
+    height: 64
+    width: 2048
+    fov_up: 3.0
+    fov_down: -25.0
+    min_range: 0.0
+    max_range: null
+    filter_max_before_projection: true
+    projection_mode: lmnet
+  normalization:
+    mode: paper_normalization
+    mean:
+      x: 10.88
+      y: 0.23
+      z: -1.04
+      range: 12.12
+      intensity: 0.21
+    std:
+      x: 11.47
+      y: 6.91
+      z: 0.86
+      range: 12.32
+      intensity: 0.16
+  input_mode: range_xyz_intensity
+  history_init: zero_missing
+  history_reference_offsets: *id001
+  pose_source: poses.txt + calib.txt (LiDAR frame)
+  gt_mapping: PRBonn semantic-kitti-mos learning_map (local mos_label_helper)
+  postprocessing:
+    method: knn
+    knn: 5
+    search: 5
+    sigma: 1.0
+    cutoff: 1.0
+    chunk_size: 32768
+  partial_smoke_test: false
+  pipeline_git_commit: 005829d4dcb8a31601d6c5aefc7683a319f141a4
+temporal_attention_gamma:
+  gamma_mean: 0.0006958461017347872
+  gamma_mean_abs: 0.0040000686421990395
+  gamma_min: -0.0199787188321352
+  gamma_max: 0.016342289745807648
+metrics:
+- metric: point_moving_iou
+  normal: 0.5868762439822872
+  mask_history: 0.58687690675459
+  bypass_temporal: 0.5868741810646921
+  delta_mask_history_minus_normal: 6.62772302817416e-07
+  delta_bypass_temporal_minus_normal: -2.0629175950803713e-06
+  delta_mask_history_percentage_points: 6.62772302817416e-05
+  delta_bypass_temporal_percentage_points: -0.00020629175950803713
+- metric: point_moving_precision
+  normal: 0.7912510570697855
+  mask_history: 0.7912475803177034
+  bypass_temporal: 0.7912317027578869
+  delta_mask_history_minus_normal: -3.4767520821210596e-06
+  delta_bypass_temporal_minus_normal: -1.9354311898589494e-05
+  delta_mask_history_percentage_points: -0.00034767520821210596
+  delta_bypass_temporal_percentage_points: -0.0019354311898589494
+- metric: point_moving_recall
+  normal: 0.6943888094675807
+  mask_history: 0.6943924149746322
+  bypass_temporal: 0.694400827824419
+  delta_mask_history_minus_normal: 3.6055070514739995e-06
+  delta_bypass_temporal_minus_normal: 1.2018356838283673e-05
+  delta_mask_history_percentage_points: 0.00036055070514739995
+  delta_bypass_temporal_percentage_points: 0.0012018356838283673
+- metric: point_moving_f1
+  normal: 0.7396622719734129
+  mask_history: 0.7396627983639191
+  bypass_temporal: 0.73966063354933
+  delta_mask_history_minus_normal: 5.263905061836383e-07
+  delta_bypass_temporal_minus_normal: -1.6384240829614427e-06
+  delta_mask_history_percentage_points: 5.2639050618363825e-05
+  delta_bypass_temporal_percentage_points: -0.00016384240829614427
+- metric: point_tp_moving
+  normal: 1155547
+  mask_history: 1155553
+  bypass_temporal: 1155567
+  delta_mask_history_minus_normal: 6
+  delta_bypass_temporal_minus_normal: 20
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: point_fp_moving
+  normal: 304858
+  mask_history: 304866
+  bypass_temporal: 304899
+  delta_mask_history_minus_normal: 8
+  delta_bypass_temporal_minus_normal: 41
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: point_fn_moving
+  normal: 508574
+  mask_history: 508568
+  bypass_temporal: 508554
+  delta_mask_history_minus_normal: -6
+  delta_bypass_temporal_minus_normal: -20
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: point_tn_static
+  normal: 484214676
+  mask_history: 484214668
+  bypass_temporal: 484214635
+  delta_mask_history_minus_normal: -8
+  delta_bypass_temporal_minus_normal: -41
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: point_n_gt_valid
+  normal: 486183655
+  mask_history: 486183655
+  bypass_temporal: 486183655
+  delta_mask_history_minus_normal: 0
+  delta_bypass_temporal_minus_normal: 0
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: point_n_points
+  normal: 499079562
+  mask_history: 499079562
+  bypass_temporal: 499079562
+  delta_mask_history_minus_normal: 0
+  delta_bypass_temporal_minus_normal: 0
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: point_n_scans
+  normal: 4071
+  mask_history: 4071
+  bypass_temporal: 4071
+  delta_mask_history_minus_normal: 0
+  delta_bypass_temporal_minus_normal: 0
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_moving_iou
+  normal: 0.6071055146655302
+  mask_history: 0.6071061337194749
+  bypass_temporal: 0.607106042498129
+  delta_mask_history_minus_normal: 6.190539446615517e-07
+  delta_bypass_temporal_minus_normal: 5.278325988511412e-07
+  delta_mask_history_percentage_points: 6.190539446615517e-05
+  delta_bypass_temporal_percentage_points: 5.278325988511412e-05
+- metric: pixel_moving_precision
+  normal: 0.8218371329617986
+  mask_history: 0.8218341817916416
+  bypass_temporal: 0.8218217583320807
+  delta_mask_history_minus_normal: -2.9511701570283932e-06
+  delta_bypass_temporal_minus_normal: -1.5374629717901378e-05
+  delta_mask_history_percentage_points: -0.0002951170157028393
+  delta_bypass_temporal_percentage_points: -0.0015374629717901378
+- metric: pixel_moving_recall
+  normal: 0.6991178372784892
+  mask_history: 0.6991207938355785
+  bypass_temporal: 0.6991296635068462
+  delta_mask_history_minus_normal: 2.956557089262013e-06
+  delta_bypass_temporal_minus_normal: 1.1826228357048052e-05
+  delta_mask_history_percentage_points: 0.0002956557089262013
+  delta_bypass_temporal_percentage_points: 0.0011826228357048052
+- metric: pixel_moving_f1
+  normal: 0.7555266398197639
+  mask_history: 0.7555271191883174
+  bypass_temporal: 0.7555270485504826
+  delta_mask_history_minus_normal: 4.793685535187109e-07
+  delta_bypass_temporal_minus_normal: 4.0873071871505573e-07
+  delta_mask_history_percentage_points: 4.793685535187109e-05
+  delta_bypass_temporal_percentage_points: 4.087307187150557e-05
+- metric: pixel_tp_moving
+  normal: 945854
+  mask_history: 945858
+  bypass_temporal: 945870
+  delta_mask_history_minus_normal: 4
+  delta_bypass_temporal_minus_normal: 16
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_fp_moving
+  normal: 205048
+  mask_history: 205053
+  bypass_temporal: 205073
+  delta_mask_history_minus_normal: 5
+  delta_bypass_temporal_minus_normal: 25
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_fn_moving
+  normal: 407071
+  mask_history: 407067
+  bypass_temporal: 407055
+  delta_mask_history_minus_normal: -4
+  delta_bypass_temporal_minus_normal: -16
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_tn_static
+  normal: 374031465
+  mask_history: 374031460
+  bypass_temporal: 374031440
+  delta_mask_history_minus_normal: -5
+  delta_bypass_temporal_minus_normal: -25
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_correct
+  normal: 374977319
+  mask_history: 374977318
+  bypass_temporal: 374977310
+  delta_mask_history_minus_normal: -1
+  delta_bypass_temporal_minus_normal: -9
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_valid_pixels
+  normal: 375589438
+  mask_history: 375589438
+  bypass_temporal: 375589438
+  delta_mask_history_minus_normal: 0
+  delta_bypass_temporal_minus_normal: 0
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
+- metric: pixel_n_scans
+  normal: 4071
+  mask_history: 4071
+  bypass_temporal: 4071
+  delta_mask_history_minus_normal: 0
+  delta_bypass_temporal_minus_normal: 0
+  delta_mask_history_percentage_points: null
+  delta_bypass_temporal_percentage_points: null
